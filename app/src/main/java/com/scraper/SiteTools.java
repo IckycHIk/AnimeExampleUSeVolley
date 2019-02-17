@@ -14,15 +14,7 @@ import org.jsoup.parser.Parser;
 
 public class SiteTools {
 
-    /**
-     * This function returns the List of all anime from the anime1 site
-     * This list is used to search for anime.
-     * Each element in the list is a list in itself that contains two things.
-     * First element is the title of the anime and the second is the link to the anime
-     *
-     * @param response The response object after connecting to the anime1 site.
-     * @return List of all anime found
-     */
+ 
     public static List<List<String>> getAnimeList(String response) {
         Document document = Jsoup.parse(response);
         List<List<String>> animeList = new ArrayList<>();
@@ -34,16 +26,7 @@ public class SiteTools {
 
     }
 
-    /**
-     * This function returns the List of all ongoing anime from the anime1 site
-     * This list is used for the front page of the app
-     * Each element in the list is a list in itself that contains two things.
-     * First element is the title of the anime and the second is the link to the anime
-     * The third element is the img url of the anime cover
-     *
-     * @param string_document The html document of anime1 ongoing page.
-     * @return List of all anime found
-     */
+
 
     public static List<List<String>> getOngoingAnimeList(String string_document) {
         Document document = Jsoup.parse(string_document);
@@ -65,13 +48,7 @@ public class SiteTools {
         return ongoingAnimeList;
     }
 
-    /**
-     * This function returns the genre availiable in the anime1 site
-     * The first item is the Title of genre and second is the url to genre page
-     *
-     * @param response
-     * @return
-     */
+ 
     public static List<List<String>> getGenreList(String response) {
         String url = "http://www.anime1.com/content/genre/";
         List<List<String>> genreList = new ArrayList<>();
@@ -84,7 +61,7 @@ public class SiteTools {
     }
 
 
-    //Use this if you ever want to get more than 20 items from genre list. THIS CODE DOESNOT WORK BUT THE METHOD IS SITLL THERE.
+  
     public static Element getAnimeByGenreElement(String url, String genre, int page) throws IOException {
         String document = Jsoup.connect(url).data("NewContent", String.valueOf(page), "selCategory", genre) //Look at this line expecially.
                 .header("Accept", "application/json, text/javascript, *; q=0.01")
@@ -103,7 +80,7 @@ public class SiteTools {
             html += "<div class=\"an-box\">" + text.substring(1, text.length() - 1) + "</div>";
         }
         Document htmlDocument = Jsoup.parse(Parser.unescapeEntities(html, false));
-        //These lines add the parent.
+       
         return htmlDocument.child(0).child(1);
     }
 
@@ -142,12 +119,7 @@ public class SiteTools {
         return episode_links;
     }
 
-    /**
-     * This function returns the videoURL from the episode page of anime1.
-     *
-     * @param response The document in string format of the anime1 episode page
-     * @return Returns the url to the raw video of the episode.
-     */
+    
     public static String getVideoURL(String response) {
         String js = "";
         Document document = Jsoup.parse(response);
