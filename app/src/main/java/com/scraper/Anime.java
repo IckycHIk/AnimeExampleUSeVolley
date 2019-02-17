@@ -17,12 +17,7 @@ public class Anime {
     private List<String> animeDescription = new ArrayList<String>();
     private List<List<String>> animeEpisodeList = new ArrayList<>();
 
-    /**
-     * Parses the anime page and constructs a document
-     * Sets all properties from the parsed document
-     *
-     * @param animeDocument The html document from the page.
-     */
+   
     public Anime(String animeDocument) {
         this.animeDocument = Jsoup.parse(animeDocument);
         setAnimeName();
@@ -31,9 +26,7 @@ public class Anime {
         setAnimeEpisodeList();
     }
 
-    /**
-     * This function sets the Anime Cover
-     */
+  
     private void setAnimeCover() {
         String image_url = "";
         Elements images = animeDocument.select("div.detail-cover>a>img");
@@ -44,17 +37,13 @@ public class Anime {
         animeCoverImage = image_url;
     }
 
-    /**
-     * Sets the anime Title
-     */
+   
     private void setAnimeName() {
         String title = animeDocument.select("div.detail-left>h1").get(0).text();
         animeName = title;
     }
 
-    /**
-     * Sets the anime Description
-     */
+   
     private void setAnimeDescription() {
         ArrayList<String> description = new ArrayList<String>(9);
         Elements details = animeDocument.select("div.detail-left>span");
@@ -74,9 +63,7 @@ public class Anime {
         animeDescription = description;
     }
 
-    /**
-     * Constructs the anime Episodes list
-     */
+    
     private void setAnimeEpisodeList() {
         List<List<String>> episodeList = new ArrayList<>();
         animeDocument.select("div.latest-box").remove();  //This will remove the redundant latest-box from the top of the page.
